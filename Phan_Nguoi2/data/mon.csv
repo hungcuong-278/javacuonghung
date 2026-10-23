@@ -1,0 +1,25 @@
+maMon,tenMon,nhomMon,donGia,tonKho,moTa
+MON001,Phin đen đá,CA_PHE,25000,100,Pha phin truyền thống với đá
+MON002,Phin đen nóng,CA_PHE,25000,100,Phin đen không đá
+MON003,Cappuccino,CA_PHE,45000,80,Sữa tươi và bọt mềm
+MON004,Latte,CA_PHE,42000,80,Sữa tươi mịn
+MON005,Americano,CA_PHE,38000,75,Espresso pha thêm nước
+MON006,Mocha,CA_PHE,48000,60,Kết hợp cà phê và sôcôla
+MON007,Nước suối,NUOC_UONG,10000,200,Chai nước suối đóng bình
+MON008,Coca Cola,NUOC_UONG,15000,150,Lon 330ml
+MON009,Pepsi,NUOC_UONG,15000,150,Lon 330ml
+MON010,Nước cam tươi,NUOC_UONG,30000,40,Cam tươi ép tại quán
+MON011,Nước dừa tươi,NUOC_UONG,35000,40,Nước dừa tươi có đá
+MON012,Soda chanh muối,NUOC_UONG,28000,50,Soda và chanh muối
+MON013,Trà đá,TRA,25000,90,Trà bột pha sẵn với đá
+MON014,Trà nóng,TRA,25000,90,Trà bột pha sẵn nóng
+MON015,Trà tắc,TRA,32000,70,Trà kết hợp chanh tắc
+MON016,Trà sữa Trân châu,TRA,45000,60,Trà sữa trân châu đen
+MON017,Trà sữa Thái,TRA,40000,60,Trà sữa vị dừa
+MON018,Trà bạc xỉu,TRA,45000,50,Trà đen và sữa tươi
+MON019,Bánh mì chà bông,BANH,15000,120,Ổ bánh mì kẹp chà bông
+MON020,Croissant bơ,BANH,30000,40,Bánh sừng bơ Pháp
+MON021,Bánh mì sữa,BANH,25000,45,Ổ bánh mì sữa nướng
+MON022,Tiramisu,BANH,55000,25,Bánh kem mặt bùa Pháp
+MON023,Cheese cake,BANH,45000,25,Bánh phô mai chanh dây
+MON024,Mousse chocolate,BANH,48000,20,Mousse sôcôla đen
