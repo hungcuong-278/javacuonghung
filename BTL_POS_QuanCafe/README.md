@@ -9,7 +9,7 @@ Yêu cầu: JDK 17 trở lên.
 
 ### Cách 1: Chạy trong IntelliJ IDEA
 
-1. Mở thư mục `Phan_Nguoi2` bằng IntelliJ IDEA
+1. Mở thư mục `BTL_POS_QuanCafe` bằng IntelliJ IDEA
 2. Đặt Project SDK là 17
 3. Mở file `src/com/pos/quancafe/MainNguoi2.java`
 4. Bấm nút **Run**
@@ -21,7 +21,7 @@ javac -encoding UTF-8 -d out src/com/pos/quancafe/**/*.java
 java -Dfile.encoding=UTF-8 -cp out com.pos.quancafe.MainNguoi2
 ```
 
-Chạy từ thư mục gốc `Phan_Nguoi2` vì dữ liệu nằm ở đường dẫn tương đối `data/`.
+Chạy từ thư mục gốc `BTL_POS_QuanCafe` vì dữ liệu nằm ở đường dẫn tương đối `data/`.
 
 ## Danh sách file
 
@@ -213,7 +213,7 @@ Thêm `-Dfile.encoding=UTF-8` vào VM options của cấu hình chạy.
 
 **Bảng trống, không có dữ liệu.**
 
-Sai Working directory. Phải trỏ về thư mục gốc `Phan_Nguoi2` (nơi có thư mục `data`).
+Sai Working directory. Phải trỏ về thư mục gốc `BTL_POS_QuanCafe` (nơi có thư mục `data`).
 
 **Chạy lại từ đầu.**
 
