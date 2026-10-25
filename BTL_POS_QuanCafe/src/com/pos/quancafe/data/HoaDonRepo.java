@@ -19,8 +19,8 @@ import java.util.Map;
  */
 public class HoaDonRepo {
 
-    private final File fileHD = new File("data/hoadon.csv");
-    private final File fileCT = new File("data/hoadon_chitiet.csv");
+    private final File fileHD;
+    private final File fileCT;
 
     private static final String[] TIEU_DE_HD = {
             "maHD", "maBan", "ngayMo", "ngayDong", "trangThai",
@@ -34,6 +34,21 @@ public class HoaDonRepo {
     private List<HoaDon> dsHoaDon = new ArrayList<>();
 
     public HoaDonRepo() {
+        this(new File("data/hoadon.csv"), new File("data/hoadon_chitiet.csv"));
+    }
+
+    /**
+     * Nạp dữ liệu từ một cặp file cụ thể.
+     * <p>
+     * Cách này cho phép chương trình kiểm thử dùng file riêng,
+     * không đụng tới dữ liệu thật của quán.
+     *
+     * @param fileHD file CSV chứa danh sách hóa đơn
+     * @param fileCT file CSV chứa chi tiết hóa đơn
+     */
+    public HoaDonRepo(File fileHD, File fileCT) {
+        this.fileHD = fileHD;
+        this.fileCT = fileCT;
         napDuLieu();
     }
 
@@ -139,6 +154,29 @@ public class HoaDonRepo {
         }
         dsHoaDon.add(hd);
         ghiFile();
+    }
+
+    /**
+     * Xóa hóa đơn và toàn bộ chi tiết của nó.
+     * <p>
+     * Dùng khi huỷ một bàn đang phục vụ, hóa đơn chưa thanh toán sẽ không
+     * còn giá trị nên xóa hẳn thay vì giữ lại làm lịch sử.
+     *
+     * @param maHD mã hóa đơn cần xóa
+     * @return true nếu đã xóa, false nếu không tìm thấy hóa đơn
+     */
+    public boolean delete(String maHD) {
+        if (maHD == null) {
+            return false;
+        }
+        for (int i = 0; i < dsHoaDon.size(); i++) {
+            if (dsHoaDon.get(i).getMaHD().equalsIgnoreCase(maHD)) {
+                dsHoaDon.remove(i);
+                ghiFile();
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Sinh mã hóa đơn mới theo ngày, ví dụ: HD20261023001 */

@@ -4,3 +4,7 @@ out/
 *.iml
 hoa_don/
 _*.py
+
+# Thu muc data/ o goc repo: duong dan tuong doi sinh ra khi chay nham
+# working directory. Du lieu that nam trong BTL_POS_QuanCafe/data/
+/data/

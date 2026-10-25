@@ -21,8 +21,10 @@ public class UiUtil {
      * Tạo nút có màu nền nhạt và chữ đen.
      * <p>
      * Vì sao không dùng nền đậm với chữ trắng: trên Windows, hệ giao diện mặc định
-     * thường bỏ qua lệnh setBackground của JButton, nên nút vẫn hiện nền trắng.
-     * Kết quả là chữ trắng trên nền trắng, không đọc được.
+     * (WindowsLookAndFeel) tự vẽ nền nút theo giao diện XP, bỏ qua lệnh
+     * {@code setBackground} của JButton. Kết quả là chữ trắng nằm trên nền
+     * trắng của hệ thống, không đọc được.
+     * <p>
      * Cách chắc chắn hơn là nền nhạt kèm chữ đen, đọc được trên mọi hệ giao diện.
      *
      * @param chu      chữ trên nút
@@ -38,7 +40,9 @@ public class UiUtil {
         btn.setForeground(Color.BLACK);
         btn.setFont(new Font("Arial", Font.BOLD, 12));
 
-        // Bỏ viền mặc định của hệ giao diện, thay bằng viền màu mình kiểm soát
+        // Bỏ viền mặc định của hệ giao diện, thay bằng viền màu mình kiểm soát.
+        // Lưu ý: phải gọi setOpaque(true) SAU setContentAreaFilled(false),
+        // vì setContentAreaFilled(false) tự đặt lại opaque thành false.
         btn.setContentAreaFilled(false);
         btn.setOpaque(true);
         btn.setFocusPainted(false);

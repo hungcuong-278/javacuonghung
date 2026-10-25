@@ -1,3 +1,6 @@
+import com.pos.quancafe.data.HoaDonRepo;
+import com.pos.quancafe.data.MonRepo;
+import com.pos.quancafe.service.ThongKeService;
 import com.pos.quancafe.ui.panel.LichSuHoaDonPanel;
 import com.pos.quancafe.ui.panel.QuanLyMonPanel;
 
@@ -24,7 +27,7 @@ public class KiemTraGiaoDien {
         SwingUtilities.invokeAndWait(() -> {
             try {
                 // --- Panel quan ly mon ---
-                QuanLyMonPanel pMon = new QuanLyMonPanel();
+                QuanLyMonPanel pMon = new QuanLyMonPanel(new MonRepo());
                 pMon.setSize(1000, 650);
                 pMon.doLayout();
 
@@ -59,7 +62,8 @@ public class KiemTraGiaoDien {
                 }
 
                 // --- Panel lich su hoa don ---
-                LichSuHoaDonPanel pHD = new LichSuHoaDonPanel();
+                HoaDonRepo hoaDonRepo = new HoaDonRepo();
+                LichSuHoaDonPanel pHD = new LichSuHoaDonPanel(hoaDonRepo, new ThongKeService(hoaDonRepo));
                 pHD.setSize(1000, 650);
                 pHD.doLayout();
 

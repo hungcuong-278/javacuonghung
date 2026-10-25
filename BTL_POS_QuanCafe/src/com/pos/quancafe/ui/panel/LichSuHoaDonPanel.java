@@ -37,8 +37,8 @@ import java.util.List;
  */
 public class LichSuHoaDonPanel extends JPanel {
 
-    private final HoaDonRepo hoaDonRepo = new HoaDonRepo();
-    private final ThongKeService thongKeService = new ThongKeService(hoaDonRepo);
+    private final HoaDonRepo hoaDonRepo;
+    private final ThongKeService thongKeService;
 
     // Bảng lịch sử
     private final DefaultTableModel modelBang = new DefaultTableModel(
@@ -57,7 +57,10 @@ public class LichSuHoaDonPanel extends JPanel {
     private final JLabel lblSoHoaDon = new JLabel("0");
     private final JLabel lblTienTrungBinh = new JLabel("0 đ");
 
-    public LichSuHoaDonPanel() {
+    public LichSuHoaDonPanel(HoaDonRepo hoaDonRepo, ThongKeService thongKeService) {
+        this.hoaDonRepo = hoaDonRepo;
+        this.thongKeService = thongKeService;
+
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -222,6 +225,17 @@ public class LichSuHoaDonPanel extends JPanel {
         hienBangTheoDanhSach(hoaDonRepo.findDaThanhToan());
     }
 
+    /**
+     * Nạp lại cả bảng lịch sử lẫn các thẻ thống kê từ file.
+     * <p>
+     * Được gọi khi quay lại màn hình này, vì dữ liệu có thể đã thay đổi
+     * do các màn hình khác ghi xuống file.
+     */
+    public void capNhatDuLieu() {
+        capNhatThongKe();
+        capNhatBang();
+    }
+
     /** Hiển thị một danh sách hóa đơn lên bảng, mới nhất lên đầu */
     private void hienBangTheoDanhSach(List<HoaDon> dsHoaDon) {
         modelBang.setRowCount(0);
@@ -297,45 +311,7 @@ public class LichSuHoaDonPanel extends JPanel {
                 hd.getTienThua()
         );
 
-        hienHopThoaiXemHoaDon(hd.getMaHD(), noiDung);
-    }
-
-    /** Hiện hộp thoại xem hóa đơn */
-    private void hienHopThoaiXemHoaDon(String maHD, String noiDung) {
-        JDialog hopThoai = new JDialog((javax.swing.JFrame) null, "Hóa đơn " + maHD, true);
-        hopThoai.setLayout(new BorderLayout(10, 10));
-
-        JTextArea vungHienThi = new JTextArea(noiDung, 30, 58);
-        vungHienThi.setEditable(false);
-        // Font đơn cách: mỗi ký tự chiếm đúng 1 cột nên khung hóa đơn thẳng nhau
-        vungHienThi.setFont(new Font("Monospaced", Font.PLAIN, 13));
-        vungHienThi.setCaretPosition(0);
-        // Nền trắng, chữ đen cho dễ đọc và dễ sao chép
-        vungHienThi.setBackground(Color.WHITE);
-        vungHienThi.setForeground(Color.BLACK);
-        vungHienThi.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-        hopThoai.add(new JScrollPane(vungHienThi), BorderLayout.CENTER);
-
-        JPanel panelNut = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelNut.add(taoNut("Lưu ra file", new Color(0x2E, 0x7D, 0x32), () -> {
-            File file = HoaDonPrinter.taoFileHoaDon(maHD);
-            if (HoaDonPrinter.xuatFileTxt(noiDung, file)) {
-                JOptionPane.showMessageDialog(hopThoai,
-                        "Đã lưu hóa đơn ra file:\n" + file.getPath(),
-                        "Lưu thành công", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(hopThoai,
-                        "Không lưu được file hóa đơn.",
-                        "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        }));
-        panelNut.add(taoNut("Đóng", new Color(0x54, 0x54, 0x54), () -> hopThoai.dispose()));
-
-        hopThoai.add(panelNut, BorderLayout.SOUTH);
-        hopThoai.pack();
-        hopThoai.setLocationRelativeTo(null);
-        hopThoai.setVisible(true);
+        new com.pos.quancafe.ui.XemHoaDonDialog(this, hd.getMaHD(), noiDung).setVisible(true);
     }
 
     // ==================== Hàm phụ ====================

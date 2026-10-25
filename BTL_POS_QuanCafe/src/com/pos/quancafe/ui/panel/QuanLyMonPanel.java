@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class QuanLyMonPanel extends JPanel {
 
-    private final MonRepo monRepo = new MonRepo();
+    private final MonRepo monRepo;
 
     // Bảng danh sách món
     private final DefaultTableModel modelBang = new DefaultTableModel(
@@ -67,7 +67,9 @@ public class QuanLyMonPanel extends JPanel {
     /** Cờ đánh dấu đang sửa món cũ hay đang thêm món mới */
     private boolean dangSua = false;
 
-    public QuanLyMonPanel() {
+    public QuanLyMonPanel(MonRepo monRepo) {
+        this.monRepo = monRepo;
+
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -450,6 +452,16 @@ public class QuanLyMonPanel extends JPanel {
     /** Nạp lại toàn bộ danh sách món vào bảng */
     private void capNhatBang() {
         hienBangTheoDanhSach(monRepo.findAll());
+    }
+
+    /**
+     * Nạp lại danh sách món từ file.
+     * <p>
+     * Được gọi khi quay lại màn hình này, vì số món và tồn kho có thể đã
+     * thay đổi do các màn hình khác ghi xuống file.
+     */
+    public void capNhatDuLieu() {
+        capNhatBang();
     }
 
     /** Hiển thị một danh sách món bất kỳ lên bảng */

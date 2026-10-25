@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class MonRepo {
 
-    private final File file = new File("data/mon.csv");
+    private final File file;
 
     private static final String[] TIEU_DE = {
             "maMon", "tenMon", "nhomMon", "donGia", "tonKho", "moTa"
@@ -27,6 +27,19 @@ public class MonRepo {
      * Nếu file chưa tồn tại thì tự tạo file kèm dữ liệu mẫu.
      */
     public MonRepo() {
+        this(new File("data/mon.csv"));
+    }
+
+    /**
+     * Nạp dữ liệu từ một file cụ thể.
+     * <p>
+     * Cách này cho phép chương trình kiểm thử dùng một file riêng,
+     * không đụng tới dữ liệu thật của quán.
+     *
+     * @param file file CSV chứa danh sách món
+     */
+    public MonRepo(File file) {
+        this.file = file;
         napDuLieu();
     }
 
